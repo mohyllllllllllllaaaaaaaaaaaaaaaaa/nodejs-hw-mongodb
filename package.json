@@ -1,8 +1,11 @@
-{
-  "name": "nodejs-hw-mongodb",
+ {
+   "name": "nodejs-hw-mongodb",
   "version": "1.0.0",
-  "main": "index.js",
+  "type": "module",
+  "main": "src/index.js",
   "scripts": {
+    "start": "node src/index.js",
+    "dev": "nodemon src/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -16,5 +19,21 @@
     "url": "https://github.com/mohyllllllllllllaaaaaaaaaaaaaaaaa/nodejs-hw-mongodb/issues"
   },
   "homepage": "https://github.com/mohyllllllllllllaaaaaaaaaaaaaaaaa/nodejs-hw-mongodb#readme",
-  "description": ""
+  "description": "",
+  "devDependencies": {
+    "@eslint/js": "^9.28.0",
+    "eslint": "^9.28.0",
+    "globals": "^16.2.0",
+    "nodemon": "^3.1.10",
+    "pino-pretty": "^13.0.0"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.5.0",
+    "express": "^5.1.0",
+    "mongodb": "^6.17.0",
+    "mongoose": "^8.15.1",
+    "pino-http": "^10.5.0"
+  }
 }
+
