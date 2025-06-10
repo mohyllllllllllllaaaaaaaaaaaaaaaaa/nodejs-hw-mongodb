@@ -10,7 +10,7 @@ export function setupServer() {
   app.use(cors());
   app.use(pinoHttp());
   app.use(express.json());
-  app.use('/api/contacts', router); 
+  app.use('/contacts', router); 
 
   app.use((req, res) => {
     res.status(404).json({ message: 'Not found rout' });
