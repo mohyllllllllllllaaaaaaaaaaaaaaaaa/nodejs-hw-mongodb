@@ -40,13 +40,17 @@ export const getContactById = async (req, res, next) => {
     next(err);
   }
 };
-export const addContact = async(req, res) => {
+export const addContact = async(req, res, next) => {
+  try{
 const contact = await createContact(req.body);
 res.status(201).json({
   status: 201,
   message: "Successfully created a contact!",
   data: contact,
 });
+}catch(error){
+  next(error);
+}
 };
 export const updateContactController = async (req, res, next) => {
   try{
@@ -67,6 +71,7 @@ export const updateContactController = async (req, res, next) => {
   }
 };
 export const deleteContactController = async(req, res, next) => {
+  try{
 const {contactId} = req.params;
 const contact = await deleteContact(contactId);
 if(!contact){
@@ -74,4 +79,7 @@ if(!contact){
   return;
 }
 res.status(204).send();
+}catch(error){
+  next(error);
+}
 };
