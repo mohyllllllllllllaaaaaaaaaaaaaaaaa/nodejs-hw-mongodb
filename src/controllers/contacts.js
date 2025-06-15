@@ -1,12 +1,9 @@
-import  mongoose from 'mongoose';
-import { createContact, deleteContact, updateContact } from '../services/contact.js';
+import { createContact, deleteContact, fetchAllContacts, fetchContactById, updateContact } from '../services/contact.js';
 import createHttpError from 'http-errors';
-import Contact from '../models/contactModel.js';
-
 
 // eslint-disable-next-line no-unused-vars
 export const getAllContacts = async (req, res, next) => {
-    const contacts = await Contact.find();
+    const contacts = await fetchAllContacts();
     res.status(200).json({
       status: 200,
       message: 'Successfully found contacts!',
@@ -15,15 +12,9 @@ export const getAllContacts = async (req, res, next) => {
 
 };
 
-
 export const getContactById = async (req, res, next) => {
     const { contactId } = req.params;
-
-    if (!mongoose.Types.ObjectId.isValid(contactId)) {
-      return res.status(400).json({ message: 'Invalid ID format' });
-    }
-
-    const contact = await Contact.findById(contactId);
+    const contact = await fetchContactById(contactId);
 
     if (!contact) {
       next(createHttpError(404, 'Contact not found'));
