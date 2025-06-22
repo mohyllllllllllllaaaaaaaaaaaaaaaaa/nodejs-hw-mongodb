@@ -1,9 +1,15 @@
 import { createContact, deleteContact, fetchAllContacts, fetchContactById, updateContact } from '../services/contact.js';
 import createHttpError from 'http-errors';
+import { parsePaginationParams } from '../utils/parsePaginationParams.js';
+import { parsedSortParams} from '../utils/parseSortParams.js';
+import { parseFilterParams } from '../utils/parseFilterParams.js';
 
 // eslint-disable-next-line no-unused-vars
 export const getAllContacts = async (req, res, next) => {
-    const contacts = await fetchAllContacts();
+  const {page, perPage} = parsePaginationParams(req.query);
+  const {sortBy, sortOrder} = parsedSortParams(req.query); 
+  const filters =  parseFilterParams(req.query)
+    const contacts = await fetchAllContacts({ page, perPage, sortBy, sortOrder, filters,  });
     res.status(200).json({
       status: 200,
       message: 'Successfully found contacts!',
