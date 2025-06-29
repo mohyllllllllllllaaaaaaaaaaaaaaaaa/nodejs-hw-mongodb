@@ -5,12 +5,14 @@ import router from './routers/contacts.js';
 import { errorHandler } from './middlewares/errorHandler.js';
 import { notFoundHandler } from './middlewares/notFoundHandler.js';
 import authRouter from './routers/auth.js';
+import cookieParser from 'cookie-parser';
+
 
 export function setupServer() {
   const app = express();
   const PORT = process.env.PORT || 3000;
 
-  app.use(cors());
+  app.use(cors(), cookieParser());
   app.use(pinoHttp());
   app.use(express.json());
   app.use('/auth', authRouter);
@@ -19,7 +21,7 @@ export function setupServer() {
   
   app.use(notFoundHandler);
  app.use(errorHandler);
- 
+
   app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
   });
