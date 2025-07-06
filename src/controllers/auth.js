@@ -1,5 +1,6 @@
+import createHttpError from "http-errors";
 import { setupSessioncookies } from "../helpers/helpers.js";
-import { logoutUser, refreshSession, registerUser } from "../services/auth.js"; 
+import { logoutUser, refreshSession, registerUser, requestResetToken, resetPassword } from "../services/auth.js"; 
 import { loginUser } from "../services/auth.js";
 
 export const registerUserController = async (req, res) => {
@@ -44,4 +45,16 @@ export const refreshSessionController = async (req, res) => {
             accessToken: session.accessToken,
         },
     });
+};
+export const sendResetEmailController = async (req, res) => {
+  const { email } = req.body;
+   if (!email) {
+    throw createHttpError(400, 'Email is required');
+  }
+  await requestResetToken(email);
+  res.status(200).json({ message: 'Reset email sent successfully' });
+};
+export const resetPasswordController = async (req, res) => {
+  await resetPassword(req.body);
+  res.status(200).json({ message: 'Password reset successful' });
 };
