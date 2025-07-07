@@ -19,7 +19,6 @@ export const sendEmail = async ({to, html, subject}) => {
             from: process.env.SMTP_FROM,
         });
     }catch(error){
-            console.error('❌ Email error:', error);
         console.error(error);
         throw createHttpError(500, 'failed to send email');
     }
