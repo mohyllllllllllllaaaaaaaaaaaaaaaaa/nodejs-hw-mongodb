@@ -41,8 +41,7 @@ const {_id: userId} = req.user;
 const file = req.file;
 let photoURL = null;
 if(file) {
-  const {secure_url} = await saveFileToCloudinary(file.path);
-  photoURL = secure_url;
+  photoURL = await saveFileToCloudinary(file.path);
 }
 const contact = await createContact({
   ...req.body,
@@ -57,27 +56,31 @@ res.status(201).json({
 
 };
 export const updateContactController = async (req, res, next) => {
-    const { _id: userId } = req.user;
-  const{ contactId } = req.params;
-   const file = req.file;
-   let updatedFile = {...req.body};
-   if(file){
-     const { secure_url } = await saveFileToCloudinary(file.path);
-      updatedFile.photo = secure_url;
-   }
+  const { _id: userId } = req.user;
+  const { contactId } = req.params;
+  const file = req.file;
+  let updatedFile = { ...req.body };
 
-  const result = await updateContact(contactId,  updatedFile, userId);
-  if(!result){
+  if (file) {
+    const secure_url = await saveFileToCloudinary(file.path);
+    updatedFile.photo = secure_url;
+  }
+
+  const result = await updateContact(contactId, updatedFile, userId);
+
+  if (!result) {
     next(createHttpError(404, 'Contact not found'));
     return;
   }
+
   res.status(200).json({
     status: 200,
     message: 'Successfully patched a contact!',
-    data: result.contact,
+    data: result,
   });
-  
 };
+
+
 export const deleteContactController = async(req, res, next) => {
     const { _id: userId } = req.user;
 const {contactId} = req.params;

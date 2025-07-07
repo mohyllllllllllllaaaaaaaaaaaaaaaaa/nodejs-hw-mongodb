@@ -10,4 +10,4 @@ const startApp = async() => {
     await createDirIfNotExists(UPLOAD_DIR);
     setupServer();
 };
-void startApp();
+startApp();

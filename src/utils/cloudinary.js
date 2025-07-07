@@ -19,8 +19,9 @@ export const saveFileToCloudinary = async (filePath) => {
     await fs.unlink(filePath); 
     return result.secure_url;
   } catch (error) {
-    console.error("💥 Cloudinary upload failed:", error);
-    throw error; 
+     console.error(" Cloudinary upload failed:", error.message);
+     throw new Error(" Cloudinary upload failed",);
+     
   }
 };
 
