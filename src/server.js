@@ -6,6 +6,7 @@ import { errorHandler } from './middlewares/errorHandler.js';
 import { notFoundHandler } from './middlewares/notFoundHandler.js';
 import authRouter from './routers/auth.js';
 import cookieParser from 'cookie-parser';
+import { setupSwagger } from './middlewares/swagger.js';
 
 
 export function setupServer() {
@@ -17,7 +18,7 @@ export function setupServer() {
   app.use(express.json());
   app.use('/auth', authRouter);
   app.use('/contacts', router); 
-
+  app.use('/api-docs', setupSwagger());
   
   app.use(notFoundHandler);
  app.use(errorHandler);

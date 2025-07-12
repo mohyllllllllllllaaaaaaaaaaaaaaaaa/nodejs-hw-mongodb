@@ -1,0 +1,51 @@
+
+  tags:
+    - Contacts
+  summary: Get a contact by ID
+  operationId: getContactById
+  description: Retrieve a specific contact by its unique identifier.
+  security:
+    - bearerAuth: []
+  parameters:
+    - name: id
+      in: path
+      required: true
+      description: ID of the contact to retrieve
+      schema:
+        type: string
+        format: uuid
+  responses:
+    '200':
+      description: Contact found
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              _id:
+                type: string
+              name:
+                type: string
+              phoneNumber:
+                type: string
+              email:
+                type: string
+              isFavourite:
+                type: boolean
+              contactType:
+                type: string
+                enum: [work, home, personal]
+              userId:
+                type: string
+              photo:
+                type: string
+              createdAt:
+                type: string
+                format: date-time
+              updatedAt:
+                type: string
+                format: date-time
+    '404':
+      description: Contact not found
+    '401':
+      description: Unauthorized – Invalid or missing bearer token

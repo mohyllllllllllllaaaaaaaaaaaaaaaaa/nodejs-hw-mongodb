@@ -1,0 +1,41 @@
+tags:
+  - Contacts
+summary: Get all contacts
+operationId: getAllContacts
+description: Returns a list of user's contacts with optional filtering.
+security:
+  - bearerAuth: []
+parameters:
+  - name: favourite
+    in: query
+    description: Filter by favourite contacts only
+    schema:
+      type: boolean
+  - name: sortBy
+    in: query
+    description: Field to sort by (currently supports only "name")
+    required: false
+    schema:
+      type: string
+      enum: [name]
+  - name: order
+    in: query
+    description: Sort order (asc or desc)
+    required: false
+    schema:
+     type: string
+     enum: [asc, desc]
+responses:
+  '200':
+    description: Successfully retrieved contact list
+    content:
+      application/json:
+        schema:
+          type: array
+          items:
+            $ref: '../../../swagger/components/schemas/contact.yaml'  
+  '401':
+    description: Unauthorized – invalid or missing token
+  '500':
+    description: Server error
+

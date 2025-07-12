@@ -1,0 +1,25 @@
+post:
+  tags:
+    - Auth
+  summary: Reset password
+  operationId: resetPassword
+  description: Updates user's password with a new one
+  security: []   # Явно кажемо — тут не потрібна авторизація
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          type: object
+          required:
+            - password
+          properties:
+            password:
+              type: string
+              minLength: 6
+  responses:
+    '200':
+      description: Password updated
+    '400':
+      description: Invalid or expired token
+

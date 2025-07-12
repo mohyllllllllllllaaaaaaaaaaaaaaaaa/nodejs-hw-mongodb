@@ -1,0 +1,30 @@
+post:
+  tags:
+    - Auth
+  summary: Register a new user
+  operationId: registerUser
+  description: Creates a new user with email and password
+  security: []  
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          type: object
+          required:
+            - email
+            - password
+          properties:
+            email:
+              type: string
+              format: email
+            password:
+              type: string
+              minLength: 6
+  responses:
+    '201':
+      description: User created
+    '400':
+      description: Invalid data
+    '409':
+      description: User already exists

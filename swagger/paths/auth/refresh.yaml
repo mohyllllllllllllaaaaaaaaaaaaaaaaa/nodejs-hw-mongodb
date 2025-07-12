@@ -1,0 +1,13 @@
+post:
+  tags:
+    - Auth
+  summary: Refresh access token
+  operationId: refreshToken
+  description: Returns a new access token
+  security:
+    - bearerAuth: []
+  responses:
+    '200':
+      description: New token issued
+    '403':
+      description: Invalid or missing refresh token

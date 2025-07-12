@@ -1,0 +1,24 @@
+tags:
+  - Contacts
+summary: Create a new contact
+operationId: createContact
+description: Adds a new contact to the user's list.
+security:
+  - bearerAuth: []
+requestBody:
+  required: true
+  content:
+    application/json:
+      schema:
+        $ref: ../../components/schemas/ContactCreate.yaml
+responses:
+  '201':
+    description: Contact successfully created
+    content:
+      application/json:
+        schema:
+          $ref: ../../components/schemas/ContactCreate.yaml
+  '400':
+    description: Validation error
+  '401':
+    description: Unauthorized - invalid or missing token

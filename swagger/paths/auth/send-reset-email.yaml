@@ -1,0 +1,25 @@
+post:
+  tags:
+    - Auth
+  summary: Send password reset email
+  operationId: sendResetEmail
+  description: Sends an email with a reset link
+  security:
+    - bearerAuth: []   
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          type: object
+          required:
+            - email
+          properties:
+            email:
+              type: string
+              format: email
+  responses:
+    '200':
+      description: Email sent
+    '404':
+      description: User not found

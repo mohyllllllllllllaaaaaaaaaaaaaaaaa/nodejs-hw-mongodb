@@ -1,0 +1,13 @@
+  post:
+      tags:
+        - Auth
+      summary: Logout
+      operationId: logoutUser
+      description: Deletes user's session
+      security:
+        - bearerAuth: []
+      responses:
+        '204':
+          description: Successfully logged out
+        '401':
+          description: Unauthorized
