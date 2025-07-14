@@ -45,5 +45,5 @@
     updatedAt:
       description: "Timestamp of last update"
       type: string
-      format: date-time
+      format:  date-time
       example: "2025-07-12T15:42:00.000Z"

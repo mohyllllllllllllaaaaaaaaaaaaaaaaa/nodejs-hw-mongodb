@@ -25,3 +25,7 @@ properties:
     type: string
     enum: [work, home, personal]
     example: personal
+  photo:
+    type: string
+    format: binary
+    description: "Image file of the contact (JPG/PNG)."
