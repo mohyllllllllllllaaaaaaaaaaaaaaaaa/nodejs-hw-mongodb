@@ -109,7 +109,7 @@
         "requestBody": {
           "required": true,
           "content": {
-            "application/json": {
+            "multipart/form-data": {
               "schema": {
                 "$ref": "#/components/schemas/ContactCreate"
               }
@@ -245,7 +245,7 @@
         "requestBody": {
           "required": true,
           "content": {
-            "application/json": {
+            "multipart/form-data": {
               "schema": {
                 "$ref": "#/components/schemas/contact"
               }
@@ -530,11 +530,7 @@
       "contact": {
         "type": "object",
         "required": [
-          "_id",
-          "name",
-          "phoneNumber",
-          "contactType",
-          "userId"
+          "_id"
         ],
         "properties": {
           "_id": {
@@ -633,6 +629,11 @@
               "personal"
             ],
             "example": "personal"
+          },
+          "photo": {
+            "type": "string",
+            "format": "binary",
+            "description": "Image file of the contact (JPG/PNG)."
           }
         }
       }
