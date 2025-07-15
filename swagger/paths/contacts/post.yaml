@@ -19,6 +19,14 @@ responses:
         schema:
           $ref: ../../components/schemas/ContactCreate.yaml
   '400':
-    description: Validation error
+    description:  Bad Request
+    content:
+      application/json:
+        schema:
+          $ref: '../../components/respons/400.yaml'
   '401':
-    description: Unauthorized - invalid or missing token
+    description: Unauthorized
+    content:
+      application/json:
+        schema:
+          $ref: '../../components/respons/401.yaml'

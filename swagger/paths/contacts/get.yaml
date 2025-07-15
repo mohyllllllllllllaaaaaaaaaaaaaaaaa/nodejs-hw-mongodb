@@ -1,41 +1,79 @@
-tags:
-  - Contacts
-summary: Get all contacts
-operationId: getAllContacts
-description: Returns a list of user's contacts with optional filtering.
-security:
-  - bearerAuth: []
-parameters:
-  - name: favourite
-    in: query
-    description: Filter by favourite contacts only
-    schema:
-      type: boolean
-  - name: sortBy
-    in: query
-    description: Field to sort by (currently supports only "name")
-    required: false
-    schema:
-      type: string
-      enum: [name]
-  - name: order
-    in: query
-    description: Sort order (asc or desc)
-    required: false
-    schema:
-     type: string
-     enum: [asc, desc]
-responses:
-  '200':
+  tags:
+    - Contacts
+  summary: Get all contacts
+  operationId: getAllContacts
+  description: Returns a list of user's contacts with optional filtering and pagination.
+  security:
+    - bearerAuth: []
+  parameters:
+    - name: favourite
+      in: query
+      description: Filter by favourite contacts only
+      schema:
+        type: boolean
+    - name: sortBy
+      in: query
+      description: Field to sort by
+      schema:
+        type: string
+        enum: [name]
+    - name: order
+      in: query
+      description: Sort order
+      schema:
+        type: string
+        enum: [asc, desc]
+    - name: page
+      in: query
+      description: Page number
+      schema:
+        type: integer
+        minimum: 1
+        default: 1
+    - name: perPage
+      in: query
+      description: Number of items per page
+      schema:
+        type: integer
+        minimum: 1
+        default: 10
+  responses:
+   '200':
     description: Successfully retrieved contact list
     content:
       application/json:
         schema:
-          type: array
-          items:
-            $ref: '../../../swagger/components/schemas/contact.yaml'  
-  '401':
-    description: Unauthorized – invalid or missing token
-  '500':
+          type: object
+          properties:
+            totalPages:
+              type: integer
+              example: 5
+            currentPage:
+              type: integer
+              example: 2
+            perPage:
+              type: integer
+              example: 10
+            totalItems:
+              type: integer
+              example: 47
+            data:
+              type: array
+              items:
+                $ref: '../../../swagger/components/schemas/contact.yaml'
+
+   '401':
+    description: Unauthorized
+    content:
+      application/json:
+        schema:
+          $ref: '../../components/respons/401.yaml'
+
+   '500':
     description: Server error
+    content:
+      application/json:
+        schema:
+          $ref: '../../components/respons/500.yaml'
+
 

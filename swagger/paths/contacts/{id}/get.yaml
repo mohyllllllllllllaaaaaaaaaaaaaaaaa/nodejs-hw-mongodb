@@ -1,4 +1,3 @@
-
   tags:
     - Contacts
   summary: Get a contact by ID
@@ -46,6 +45,15 @@
                 type: string
                 format: date-time
     '404':
-      description: Contact not found
+     description: Not found contact
+     content:
+       application/json:
+         schema:
+           $ref: '../../../components/respons/404.yaml'
+
     '401':
-      description: Unauthorized – Invalid or missing bearer token
+     description: Unauthorized
+     content:
+       application/json:
+         schema:
+           $ref: '../../../components/respons/401.yaml'

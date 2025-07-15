@@ -17,7 +17,7 @@ requestBody:
   content:
      multipart/form-data:
       schema:
-        $ref: ../../../components/schemas/contact.yaml
+        $ref: ../../../components/schemas/updateContact.yaml
 responses:
   '200':
     description: Contact successfully updated
@@ -25,5 +25,21 @@ responses:
       application/json:
         schema:
           $ref: ../../../components/schemas/contact.yaml
+  '400':
+    description: Not found contact
+    content:
+      application/json:
+        schema:
+          $ref: ../../../components/respons/400.yaml        
   '404':
-    description: Contact not found
+     description: Not found contact
+     content:
+       application/json:
+         schema:
+           $ref: '../../../components/respons/404.yaml'
+  '500':
+    description: Not found contact
+    content:
+      application/json:
+        schema:
+          $ref: ../../../components/respons/500.yaml

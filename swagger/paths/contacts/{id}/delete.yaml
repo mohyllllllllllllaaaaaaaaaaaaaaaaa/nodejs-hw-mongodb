@@ -16,5 +16,9 @@ responses:
   '204':
     description: Contact successfully deleted (no response body)
   '404':
-    description: Contact not found
+    description: Not found contact
+    content:
+      application/json:
+        schema:
+          $ref: ../../../components/respons/404.yaml
 
