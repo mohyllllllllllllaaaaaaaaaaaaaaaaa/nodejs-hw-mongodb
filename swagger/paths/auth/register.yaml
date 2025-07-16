@@ -14,7 +14,10 @@ post:
           required:
             - email
             - password
+            - name
           properties:
+            name: 
+             type: string
             email:
               type: string
               format: email
@@ -24,7 +27,67 @@ post:
   responses:
     '201':
       description: User created
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+              - status
+              - message
+              - data
+            properties:
+              status:
+                type: integer
+                example: 201
+              message:
+                type: string
+                example: Successfully registered a user!
+              data:
+                type: object
+                required:
+                  - _id
+                  - name
+                  - email
+                  - createdAt
+                  - updatedAt
+                properties:
+                  _id:
+                    type: string
+                    example: 68779d18704f27a9595b55d4
+                  name:
+                    type: string
+                    example: Nataliia
+                  email:
+                    type: string
+                    format: email
+                    example: nataliiamohyla25@gmail.com
+                  createdAt:
+                    type: string
+                    format: date-time
+                    example: 2025-07-16T12:37:44.786Z
+                  updatedAt:
+                    type: string
+                    format: date-time
+                    example: 2025-07-16T12:37:44.786Z
     '400':
       description: Invalid data
+      content: 
+        application/json: 
+          schema: 
+            $ref: ../../components/respons/auth-400.yaml
     '409':
-      description: User already exists
+      description: Email in use
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+              - status
+              - message
+            properties:
+              status:
+                type: integer
+                example: 409
+              message:
+                type: string
+                example: Email in use

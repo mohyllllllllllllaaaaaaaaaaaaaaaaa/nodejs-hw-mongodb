@@ -4,7 +4,7 @@ post:
   summary: Reset password
   operationId: resetPassword
   description: Updates user's password with a new one
-  security: []   # Явно кажемо — тут не потрібна авторизація
+  security: []   
   requestBody:
     required: true
     content:
@@ -18,8 +18,42 @@ post:
               type: string
               minLength: 6
   responses:
-    '200':
-      description: Password updated
-    '400':
-      description: Invalid or expired token
+   '200':
+     description: Password updated
+     content:
+      application/json:
+        schema:
+          type: object
+          required:
+            - status
+            - message
+            - data
+          properties:
+            status:
+              type: integer
+              example: 200
+            message:
+              type: string
+              example: Password reset successful
+            data:
+              type: object
+              example: {}
+
+   '401':
+    description: Invalid or expired token
+    content:
+      application/json:
+        schema:
+          type: object
+          required:
+            - status
+            - message
+          properties:
+            status:
+              type: integer
+              example: 401
+            message:
+              type: string
+              example: Invalid or expired token
+
 

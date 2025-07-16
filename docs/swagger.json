@@ -11,9 +11,6 @@
   },
   "servers": [
     {
-      "url": "http://localhost:3000"
-    },
-    {
       "url": "https://nodejs-hw-mongodb-64dr.onrender.com"
     }
   ],
@@ -92,35 +89,11 @@
         ],
         "responses": {
           "200": {
-            "description": "Successfully retrieved contact list",
+            "description": "Successfully found contacts!",
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "totalPages": {
-                      "type": "integer",
-                      "example": 5
-                    },
-                    "currentPage": {
-                      "type": "integer",
-                      "example": 2
-                    },
-                    "perPage": {
-                      "type": "integer",
-                      "example": 10
-                    },
-                    "totalItems": {
-                      "type": "integer",
-                      "example": 47
-                    },
-                    "data": {
-                      "type": "array",
-                      "items": {
-                        "$ref": "#/components/schemas/contact"
-                      }
-                    }
-                  }
+                  "$ref": "#/components/schemas/200"
                 }
               }
             }
@@ -175,7 +148,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ContactCreate"
+                  "$ref": "#/components/schemas/contact"
                 }
               }
             }
@@ -230,50 +203,11 @@
         ],
         "responses": {
           "200": {
-            "description": "Contact found",
+            "description": "Successfully found contact!",
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "_id": {
-                      "type": "string"
-                    },
-                    "name": {
-                      "type": "string"
-                    },
-                    "phoneNumber": {
-                      "type": "string"
-                    },
-                    "email": {
-                      "type": "string"
-                    },
-                    "isFavourite": {
-                      "type": "boolean"
-                    },
-                    "contactType": {
-                      "type": "string",
-                      "enum": [
-                        "work",
-                        "home",
-                        "personal"
-                      ]
-                    },
-                    "userId": {
-                      "type": "string"
-                    },
-                    "photo": {
-                      "type": "string"
-                    },
-                    "createdAt": {
-                      "type": "string",
-                      "format": "date-time"
-                    },
-                    "updatedAt": {
-                      "type": "string",
-                      "format": "date-time"
-                    }
-                  }
+                  "$ref": "#/components/schemas/200-getOne"
                 }
               }
             }
@@ -433,9 +367,13 @@
                 "type": "object",
                 "required": [
                   "email",
-                  "password"
+                  "password",
+                  "name"
                 ],
                 "properties": {
+                  "name": {
+                    "type": "string"
+                  },
                   "email": {
                     "type": "string",
                     "format": "email"
@@ -451,13 +389,98 @@
         },
         "responses": {
           "201": {
-            "description": "User created"
+            "description": "User created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "status",
+                    "message",
+                    "data"
+                  ],
+                  "properties": {
+                    "status": {
+                      "type": "integer",
+                      "example": 201
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Successfully registered a user!"
+                    },
+                    "data": {
+                      "type": "object",
+                      "required": [
+                        "_id",
+                        "name",
+                        "email",
+                        "createdAt",
+                        "updatedAt"
+                      ],
+                      "properties": {
+                        "_id": {
+                          "type": "string",
+                          "example": "68779d18704f27a9595b55d4"
+                        },
+                        "name": {
+                          "type": "string",
+                          "example": "Nataliia"
+                        },
+                        "email": {
+                          "type": "string",
+                          "format": "email",
+                          "example": "nataliiamohyla25@gmail.com"
+                        },
+                        "createdAt": {
+                          "type": "string",
+                          "format": "date-time",
+                          "example": "2025-07-16T12:37:44.786Z"
+                        },
+                        "updatedAt": {
+                          "type": "string",
+                          "format": "date-time",
+                          "example": "2025-07-16T12:37:44.786Z"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
           },
           "400": {
-            "description": "Invalid data"
+            "description": "Invalid data",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/auth-400"
+                }
+              }
+            }
           },
           "409": {
-            "description": "User already exists"
+            "description": "Email in use",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "status",
+                    "message"
+                  ],
+                  "properties": {
+                    "status": {
+                      "type": "integer",
+                      "example": 409
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Email in use"
+                    }
+                  }
+                }
+              }
+            }
           }
         }
       }
@@ -496,10 +519,75 @@
         },
         "responses": {
           "200": {
-            "description": "Successful login"
+            "description": "Successful login",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "status",
+                    "message",
+                    "data"
+                  ],
+                  "properties": {
+                    "status": {
+                      "type": "integer",
+                      "example": 200
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Successfully logged in a user!"
+                    },
+                    "data": {
+                      "type": "object",
+                      "required": [
+                        "accessToken"
+                      ],
+                      "properties": {
+                        "accessToken": {
+                          "type": "string",
+                          "example": "iMmj6vRqkY2WcWnhBbyjJGMRN626itn9U2Qmc9Dc"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Validation error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/auth-400"
+                }
+              }
+            }
           },
           "401": {
-            "description": "Invalid email or password"
+            "description": "User not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "status",
+                    "message"
+                  ],
+                  "properties": {
+                    "status": {
+                      "type": "integer",
+                      "example": 401
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "User not found"
+                    }
+                  }
+                }
+              }
+            }
           }
         }
       }
@@ -522,7 +610,28 @@
             "description": "Successfully logged out"
           },
           "401": {
-            "description": "Unauthorized"
+            "description": "Session not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "status",
+                    "message"
+                  ],
+                  "properties": {
+                    "status": {
+                      "type": "integer",
+                      "example": 401
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "No refreshToken or sessionId in cookies"
+                    }
+                  }
+                }
+              }
+            }
           }
         }
       }
@@ -542,10 +651,65 @@
         ],
         "responses": {
           "200": {
-            "description": "New token issued"
+            "description": "New token issued",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "status",
+                    "message",
+                    "data"
+                  ],
+                  "properties": {
+                    "status": {
+                      "type": "integer",
+                      "example": 200
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Succesfully refreshed a session"
+                    },
+                    "data": {
+                      "type": "object",
+                      "required": [
+                        "accessToken"
+                      ],
+                      "properties": {
+                        "accessToken": {
+                          "type": "string",
+                          "example": "SMfSgiF5hI6AkFePF4bqf7y8chntxAli9jF+ZYZv"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
           },
-          "403": {
-            "description": "Invalid or missing refresh token"
+          "401": {
+            "description": "Session not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "status",
+                    "message"
+                  ],
+                  "properties": {
+                    "status": {
+                      "type": "integer",
+                      "example": 401
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "No refreshToken or sessionId in cookies"
+                    }
+                  }
+                }
+              }
+            }
           }
         }
       }
@@ -584,10 +748,67 @@
         },
         "responses": {
           "200": {
-            "description": "Email sent"
+            "description": "Email sent",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "status",
+                    "message",
+                    "data"
+                  ],
+                  "properties": {
+                    "status": {
+                      "type": "integer",
+                      "example": 200
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Reset password email has been successfully sent."
+                    },
+                    "data": {
+                      "type": "object",
+                      "example": {}
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/auth-400"
+                }
+              }
+            }
           },
           "404": {
-            "description": "User not found"
+            "description": "User not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "status",
+                    "message"
+                  ],
+                  "properties": {
+                    "status": {
+                      "type": "integer",
+                      "example": 404
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "User not found"
+                    }
+                  }
+                }
+              }
+            }
           }
         }
       }
@@ -622,10 +843,57 @@
         },
         "responses": {
           "200": {
-            "description": "Password updated"
+            "description": "Password updated",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "status",
+                    "message",
+                    "data"
+                  ],
+                  "properties": {
+                    "status": {
+                      "type": "integer",
+                      "example": 200
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Password reset successful"
+                    },
+                    "data": {
+                      "type": "object",
+                      "example": {}
+                    }
+                  }
+                }
+              }
+            }
           },
-          "400": {
-            "description": "Invalid or expired token"
+          "401": {
+            "description": "Invalid or expired token",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "status",
+                    "message"
+                  ],
+                  "properties": {
+                    "status": {
+                      "type": "integer",
+                      "example": 401
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Invalid or expired token"
+                    }
+                  }
+                }
+              }
+            }
           }
         }
       }
@@ -639,6 +907,59 @@
       }
     },
     "schemas": {
+      "200": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "integer",
+            "example": 200
+          },
+          "message": {
+            "type": "string",
+            "example": "Successfully found contacts!"
+          },
+          "data": {
+            "type": "object",
+            "properties": {
+              "data": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/contact"
+                }
+              },
+              "page": {
+                "type": "integer",
+                "example": 1
+              },
+              "perPage": {
+                "type": "integer",
+                "example": 10
+              },
+              "totalItems": {
+                "type": "integer",
+                "example": 47
+              },
+              "totalPages": {
+                "type": "integer",
+                "example": 5
+              },
+              "hasNextPage": {
+                "type": "boolean",
+                "example": true
+              },
+              "hasPreviousPage": {
+                "type": "boolean",
+                "example": false
+              }
+            }
+          }
+        },
+        "required": [
+          "status",
+          "message",
+          "data"
+        ]
+      },
       "400": {
         "type": "object",
         "required": [
@@ -834,6 +1155,27 @@
           }
         }
       },
+      "200-getOne": {
+        "type": "object",
+        "required": [
+          "status",
+          "message",
+          "data"
+        ],
+        "properties": {
+          "status": {
+            "type": "integer",
+            "example": 200
+          },
+          "message": {
+            "type": "string",
+            "example": "Successfully found contact with id 686c0e46b25d2a0a41e6d51a!"
+          },
+          "data": {
+            "$ref": "#/components/schemas/contact"
+          }
+        }
+      },
       "updateContact": {
         "type": "object",
         "properties": {
@@ -871,6 +1213,94 @@
             "type": "string",
             "format": "binary",
             "description": "Link to contact's photo"
+          }
+        }
+      },
+      "auth-400": {
+        "type": "object",
+        "required": [
+          "status",
+          "message",
+          "data"
+        ],
+        "properties": {
+          "status": {
+            "type": "integer",
+            "example": 400
+          },
+          "message": {
+            "type": "string",
+            "example": "Bad Request Errors"
+          },
+          "data": {
+            "type": "object",
+            "required": [
+              "message",
+              "errors"
+            ],
+            "properties": {
+              "message": {
+                "type": "string",
+                "example": "Validation failed"
+              },
+              "errors": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "required": [
+                    "message",
+                    "path",
+                    "type",
+                    "context"
+                  ],
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "\"email\" must be a valid email"
+                    },
+                    "path": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      },
+                      "example": [
+                        "email"
+                      ]
+                    },
+                    "type": {
+                      "type": "string",
+                      "example": "string.email"
+                    },
+                    "context": {
+                      "type": "object",
+                      "properties": {
+                        "value": {
+                          "type": "string",
+                          "example": "mogilesha81@gmail.coma"
+                        },
+                        "invalids": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          },
+                          "example": [
+                            "mogilesha81@gmail.coma"
+                          ]
+                        },
+                        "label": {
+                          "type": "string",
+                          "example": "email"
+                        },
+                        "key": {
+                          "type": "string",
+                          "example": "email"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
           }
         }
       }

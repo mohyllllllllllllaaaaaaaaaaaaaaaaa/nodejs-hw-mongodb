@@ -21,5 +21,45 @@ post:
   responses:
     '200':
       description: Email sent
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+              - status
+              - message
+              - data
+            properties:
+              status:
+                type: integer
+                example: 200
+              message:
+                type: string
+                example: Reset password email has been successfully sent.
+              data:
+                type: object
+                example: {}
+    '400':
+     description:  Bad Request
+     content:
+      application/json:
+        schema:
+          $ref: ../../components/respons/auth-400.yaml            
     '404':
-      description: User not found
+     description: User not found 
+     content:
+      application/json:
+       schema:
+        type: object
+        required:
+          - status
+          - message
+        properties:
+          status:
+            type: integer
+            example: 404
+          message:
+            type: string
+            example: User not found
+
+    

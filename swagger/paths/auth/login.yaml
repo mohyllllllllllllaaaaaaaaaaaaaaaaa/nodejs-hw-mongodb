@@ -22,6 +22,51 @@ post:
               type: string
   responses:
     '200':
-      description: Successful login
+     description: Successful login
+     content:
+      application/json:
+        schema:
+          type: object
+          required:
+            - status
+            - message
+            - data
+          properties:
+            status:
+              type: integer
+              example: 200
+            message:
+              type: string
+              example: Successfully logged in a user!
+            data:
+              type: object
+              required:
+                - accessToken
+              properties:
+                accessToken:
+                  type: string
+                  example: iMmj6vRqkY2WcWnhBbyjJGMRN626itn9U2Qmc9Dc
+
+    '400':
+     description: Validation error
+     content:
+      application/json:
+        schema:
+          $ref: '../../components/respons/auth-400.yaml'
     '401':
-      description: Invalid email or password
+      description: User not found
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+              - status
+              - message
+            properties:
+              status:
+                type: integer
+                example: 401
+              message:
+                type: string
+                example: User not found
+           

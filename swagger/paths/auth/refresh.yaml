@@ -9,5 +9,42 @@ post:
   responses:
     '200':
       description: New token issued
-    '403':
-      description: Invalid or missing refresh token
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+              - status
+              - message
+              - data
+            properties:
+              status:
+                type: integer
+                example: 200
+              message:
+                type: string
+                example: Succesfully refreshed a session
+              data:
+                type: object
+                required:
+                  - accessToken
+                properties:
+                  accessToken:
+                    type: string
+                    example: SMfSgiF5hI6AkFePF4bqf7y8chntxAli9jF+ZYZv
+    '401':
+      description: Session not found
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+              - status
+              - message
+            properties:
+              status:
+                type: integer
+                example: 401
+              message:
+                type: string
+                example: No refreshToken or sessionId in cookies

@@ -39,28 +39,11 @@
         default: 10
   responses:
    '200':
-    description: Successfully retrieved contact list
+    description: Successfully found contacts!
     content:
       application/json:
         schema:
-          type: object
-          properties:
-            totalPages:
-              type: integer
-              example: 5
-            currentPage:
-              type: integer
-              example: 2
-            perPage:
-              type: integer
-              example: 10
-            totalItems:
-              type: integer
-              example: 47
-            data:
-              type: array
-              items:
-                $ref: '../../../swagger/components/schemas/contact.yaml'
+          $ref: '../../components/respons/200.yaml'
 
    '401':
     description: Unauthorized

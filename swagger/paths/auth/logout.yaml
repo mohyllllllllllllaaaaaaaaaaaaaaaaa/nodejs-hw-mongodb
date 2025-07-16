@@ -1,13 +1,27 @@
-  post:
-      tags:
-        - Auth
-      summary: Logout
-      operationId: logoutUser
-      description: Deletes user's session
-      security:
-        - bearerAuth: []
-      responses:
-        '204':
-          description: Successfully logged out
-        '401':
-          description: Unauthorized
+post:
+  tags:
+    - Auth
+  summary: Logout
+  operationId: logoutUser
+  description: Deletes user's session
+  security:
+    - bearerAuth: []
+  responses:
+    '204':
+      description: Successfully logged out
+    '401':
+      description: Session not found
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+              - status
+              - message
+            properties:
+              status:
+                type: integer
+                example: 401
+              message:
+                type: string
+                example: No refreshToken or sessionId in cookies 

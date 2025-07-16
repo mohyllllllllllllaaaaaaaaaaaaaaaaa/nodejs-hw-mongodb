@@ -15,35 +15,11 @@
         format: uuid
   responses:
     '200':
-      description: Contact found
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              _id:
-                type: string
-              name:
-                type: string
-              phoneNumber:
-                type: string
-              email:
-                type: string
-              isFavourite:
-                type: boolean
-              contactType:
-                type: string
-                enum: [work, home, personal]
-              userId:
-                type: string
-              photo:
-                type: string
-              createdAt:
-                type: string
-                format: date-time
-              updatedAt:
-                type: string
-                format: date-time
+     description: Successfully found contact!
+     content:
+       application/json:
+         schema:
+           $ref: ../../../components/respons/200-getOne.yaml
     '404':
      description: Not found contact
      content:

@@ -17,7 +17,7 @@ responses:
     content:
       application/json:
         schema:
-          $ref: ../../components/schemas/ContactCreate.yaml
+          $ref: ../../components/schemas/contact.yaml
   '400':
     description:  Bad Request
     content:

@@ -1,0 +1,61 @@
+type: object
+required:
+  - status
+  - message
+  - data
+properties:
+  status:
+    type: integer
+    example: 400
+  message:
+    type: string
+    example: Bad Request Errors
+  data:
+    type: object
+    required:
+      - message
+      - errors
+    properties:
+      message:
+        type: string
+        example: Validation failed
+      errors:
+        type: array
+        items:
+          type: object
+          required:
+            - message
+            - path
+            - type
+            - context
+          properties:
+            message:
+              type: string
+              example: "\"email\" must be a valid email"
+            path:
+              type: array
+              items:
+                type: string
+              example: ["email"]
+            type:
+              type: string
+              example: string.email
+            context:
+              type: object
+              properties:
+                value:
+                  type: string
+                  example: mogilesha81@gmail.coma
+                invalids:
+                  type: array
+                  items:
+                    type: string
+                  example: ["mogilesha81@gmail.coma"]
+                label:
+                  type: string
+                  example: email
+                key:
+                  type: string
+                  example: email
+
+
