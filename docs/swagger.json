@@ -676,7 +676,7 @@
                     },
                     "message": {
                       "type": "string",
-                      "example": "No refreshToken or sessionId in cookies"
+                      "example": "Session not found"
                     }
                   }
                 }
@@ -909,9 +909,13 @@
               "schema": {
                 "type": "object",
                 "required": [
-                  "password"
+                  "password",
+                  "token"
                 ],
                 "properties": {
+                  "token": {
+                    "type": "string"
+                  },
                   "password": {
                     "type": "string",
                     "minLength": 6

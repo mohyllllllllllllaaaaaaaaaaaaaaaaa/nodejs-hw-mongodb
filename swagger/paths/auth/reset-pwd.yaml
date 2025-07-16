@@ -13,7 +13,10 @@ post:
           type: object
           required:
             - password
+            - token
           properties:
+            token:
+              type: string
             password:
               type: string
               minLength: 6
