@@ -21,4 +21,9 @@ responses:
       application/json:
         schema:
           $ref: ../../../components/respons/404.yaml
-
+  '500':
+    description: Server error
+    content:
+      application/json:
+        schema:
+          $ref: ../../../components/respons/500.yaml

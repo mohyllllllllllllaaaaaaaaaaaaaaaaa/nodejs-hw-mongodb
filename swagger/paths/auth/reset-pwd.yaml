@@ -55,5 +55,10 @@ post:
             message:
               type: string
               example: Invalid or expired token
-
+   '500':
+     description: Server error
+     content:
+      application/json:
+        schema:
+          $ref: ../../components/respons/500.yaml
 

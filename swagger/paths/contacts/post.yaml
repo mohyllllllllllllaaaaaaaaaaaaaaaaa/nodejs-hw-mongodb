@@ -30,3 +30,9 @@ responses:
       application/json:
         schema:
           $ref: '../../components/respons/401.yaml'
+  '500':
+    description: Server error
+    content:
+      application/json:
+        schema:
+          $ref: '../../components/respons/500.yaml'

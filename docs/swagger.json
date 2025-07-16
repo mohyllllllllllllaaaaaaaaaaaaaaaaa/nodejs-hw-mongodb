@@ -172,6 +172,16 @@
                 }
               }
             }
+          },
+          "500": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/500"
+                }
+              }
+            }
           }
         }
       }
@@ -228,6 +238,16 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/404"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/500"
                 }
               }
             }
@@ -343,6 +363,16 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/404"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/500"
                 }
               }
             }
@@ -481,6 +511,16 @@
                 }
               }
             }
+          },
+          "500": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/500"
+                }
+              }
+            }
           }
         }
       }
@@ -588,6 +628,16 @@
                 }
               }
             }
+          },
+          "500": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/500"
+                }
+              }
+            }
           }
         }
       }
@@ -629,6 +679,16 @@
                       "example": "No refreshToken or sessionId in cookies"
                     }
                   }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/500"
                 }
               }
             }
@@ -707,6 +767,16 @@
                       "example": "No refreshToken or sessionId in cookies"
                     }
                   }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/500"
                 }
               }
             }
@@ -809,6 +879,16 @@
                 }
               }
             }
+          },
+          "500": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/500"
+                }
+              }
+            }
           }
         }
       }
@@ -891,6 +971,16 @@
                       "example": "Invalid or expired token"
                     }
                   }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/500"
                 }
               }
             }

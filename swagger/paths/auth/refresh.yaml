@@ -48,3 +48,9 @@ post:
               message:
                 type: string
                 example: No refreshToken or sessionId in cookies
+    '500':
+     description: Server error
+     content:
+      application/json:
+        schema:
+          $ref: ../../components/respons/500.yaml
